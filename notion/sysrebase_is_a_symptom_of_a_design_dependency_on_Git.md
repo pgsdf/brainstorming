@@ -1,7 +1,7 @@
 # Git-Based Release Models, sysrebase, and the Problem with “Blame”
 
 When I built **sysrebase**, I realized it exists only because the current release process depends on a **Git-based model**.  
-In that model, the system state — base, ports, and packages — must be synchronized to specific commit points.  
+In that model, the system state, base, ports, and packages, must be synchronized to specific commit points.  
 
 If the project were to move to a model that does not use Git snapshots or commit-based synchronization, such as a **continuously versioned artifact model** or **immutable package streams**, then the need for `sysrebase` would disappear.  
 
