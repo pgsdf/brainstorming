@@ -31,7 +31,7 @@ Each patch is:
 - Applied atomically in a ZFS boot environment  
 - Reversible with one command
 
-Users no longer upgrade from 24.10 to 24.11.  
+Users no longer upgrade from 24.10 to 25.02.  
 They move from one verified patch set to the next.
 
 ```bash
