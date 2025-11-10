@@ -1,9 +1,9 @@
-# Rethinking Releases: Moving GhostBSD Toward a Pijul-Style Channel Model
+# Rethinking Releases: Moving PGSD Toward a Pijul-Style Channel Model
 
 Traditional releases work well when you have a few large milestones per year.  
-But as GhostBSD evolves faster and the infrastructure around ZFS and pkgbase becomes more modular, fixed releases start to feel outdated.  
+But as PGSD evolves faster and the infrastructure around ZFS and pkgbase becomes more modular, fixed releases start to feel outdated.  
 
-Instead of publishing “GhostBSD 25.02,” we could take a page from **Pijul’s model**, treating every system state as a signed sequence of patches that live inside a **channel**.
+Instead of publishing “PGSD 25.02,” we could take a page from **Pijul’s model**, treating every system state as a signed sequence of patches that live inside a **channel**.
 
 ---
 
@@ -35,9 +35,9 @@ Users no longer upgrade from 24.10 to 25.02.
 They move from one verified patch set to the next.
 
 ```bash
-gbsd channel show
-gbsd update
-gbsd rollback
+pgsd channel show
+pgsd update
+pgsd rollback
 ````
 
 Each system identifies itself in a reproducible way:
@@ -77,7 +77,7 @@ Every channel maintains:
 Example names:
 
 ```
-GhostBSD.stable.202511091745.iso
+PGSD.stable.202511091745.iso
 baseline.stable.20251015.img
 patches/stable/VQ/2M/VQ2M7H6.tar.zst
 channels/stable/channel.index
@@ -94,7 +94,7 @@ channels/stable/channel.index
 
 ---
 
-## 6. ghostbsd-build in a Channel World
+## 6. pgsd-build in a Channel World
 
 Only small changes are required in `build.sh`:
 
@@ -110,7 +110,7 @@ _stamp() {
 }
 
 BUILD_STAMP="$(_stamp +%Y%m%d%H%M)"
-ISO_NAME="GhostBSD.${CHANNEL}.${BUILD_STAMP}.iso"
+ISO_NAME="PGSD.${CHANNEL}.${BUILD_STAMP}.iso"
 ```
 
 After building packages and images, the system signs and publishes a `channel.index`:
@@ -131,11 +131,11 @@ minisign -S -s channel_private.key -m channel.index
 3. Let advanced users opt into the channel model:
 
    ```bash
-   gbsd migrate --channel stable
+   pgsd migrate --channel stable
    ```
 
 4. Over time, de-emphasize traditional version numbers.
-   For example, “GhostBSD 25.02” becomes **stable@patch:XYZ1234**.
+   For example, “25.02” becomes **stable@patch:XYZ1234**.
 
 ---
 
@@ -151,13 +151,13 @@ minisign -S -s channel_private.key -m channel.index
 
 ## 9. Trade-Offs
 
-* Requires new tooling (`gbsd-channel`, patch signing, server automation)
+* Requires new tooling (`pgsd-channel`, patch signing, server automation)
 * Demands more discipline when preparing patches
 * Some users prefer periodic named releases, so communication will matter
 
 ---
 
 **In short:**
-GhostBSD could evolve into a living system that is always current and always verifiable, without the artificial rhythm of fixed releases.
+PGSD could evolve into a living system that is always current and always verifiable, without the artificial rhythm of fixed releases.
 Every change becomes a signed patch in a channel, and the “release” is simply the patch set you trust today.
 
