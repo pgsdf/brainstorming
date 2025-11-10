@@ -1,4 +1,3 @@
-````markdown
 # Rethinking Releases: Moving GhostBSD Toward a Pijul-Style Channel Model
 
 Traditional releases work well when you have a few large milestones per year.  
@@ -162,5 +161,3 @@ minisign -S -s channel_private.key -m channel.index
 GhostBSD could evolve into a living system that is always current and always verifiable, without the artificial rhythm of fixed releases.
 Every change becomes a signed patch in a channel, and the “release” is simply the patch set you trust today.
 
-```
-```
